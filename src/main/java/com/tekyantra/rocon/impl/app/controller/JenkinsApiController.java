@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
+import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -22,7 +23,11 @@ public class JenkinsApiController {
                     "admin", "111f1aa1170cd9cb582d26cd818d2f87d3");
             Map<String, Job> jobs = jenkins.getJobs();
             JobWithDetails job = jobs.get("build-rocon-services-impl").details();
-            job.build();
+            //job.build();
+            Map<String, String> params = new HashMap<>();
+            params.put("sample", "FROMAPI");
+            job.build(params);
+
         } catch (Exception e){
             e.printStackTrace();
         }
